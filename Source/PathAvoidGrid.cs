@@ -139,7 +139,6 @@ namespace PathAvoid
         
         public static void ApplyAvoidGrid(Pawn p, ref ByteGrid result)
         {
-            Log.Message("ApplyAvoidGrid Start");
             if (result == null &&
                 p.Faction != null && p.Faction.def.canUseAvoidGrid &&
                 (p.Faction == Faction.OfPlayer || !p.Faction.RelationWith(Faction.OfPlayer, false).hostile))
@@ -151,9 +150,7 @@ namespace PathAvoid
                     p.Map.components.Add(pathAvoidGrid);
                 }
                 result = pathAvoidGrid.grid;
-                Log.Message("ApplyAvoidGrid Using Grid");
             }
-            Log.Message("ApplyAvoidGrid End");
         }
     }
 }

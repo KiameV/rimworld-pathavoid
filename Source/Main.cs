@@ -10,7 +10,7 @@ namespace PathAvoid
     {
         static Main()
         {
-            var harmony = HarmonyInstance.Create("com.changedresser.rimworld.mod");
+            var harmony = HarmonyInstance.Create("com.pathavoid.rimworld.mod");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             Log.Message("Path Avoid: Adding Harmony Postfix to PawnUtility.GetAvoidGrid()");
