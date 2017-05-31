@@ -61,21 +61,28 @@ namespace PathAvoid
         public override void DesignateSingleCell(IntVec3 c)
         {
             PathAvoidGrid pathAvoidGrid = base.Map.GetComponent<PathAvoidGrid>();
-            bool flag = pathAvoidGrid == null;
-            if (flag)
+            if (pathAvoidGrid == null)
             {
                 pathAvoidGrid = new PathAvoidGrid(base.Map);
                 base.Map.components.Add(pathAvoidGrid);
             }
             pathAvoidGrid.SetValue(c, (byte)this.def.level);
+            Log.Warning("DesignateSingleCell level " + this.def.level);
+            if (this.def.level == 40)
+            {
+                Util.AddBlocked(c);
+            }
+            else
+            {
+                Util.RemoveBlocked(c);
+            }
         }
 
         public override void SelectedUpdate()
         {
             GenUI.RenderMouseoverBracket();
             PathAvoidGrid pathAvoidGrid = base.Map.GetComponent<PathAvoidGrid>();
-            bool flag = pathAvoidGrid == null;
-            if (flag)
+            if (pathAvoidGrid == null)
             {
                 pathAvoidGrid = new PathAvoidGrid(base.Map);
                 base.Map.components.Add(pathAvoidGrid);

@@ -127,8 +127,7 @@ namespace PathAvoid
         public void SetValue(IntVec3 pos, byte val)
         {
             this.grid[pos] = val;
-            bool flag = this.LevelDrawers != null;
-            if (flag)
+            if (this.LevelDrawers != null)
             {
                 foreach (CellBoolDrawer current in this.LevelDrawers)
                 {
