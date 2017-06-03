@@ -39,7 +39,7 @@ namespace PathAvoid
 
             public Color GetCellExtraColor(int index)
             {
-                return this.color;
+                return Color.white;
             }
         }
 
