@@ -28,40 +28,15 @@ namespace PathAvoid
         }
     }
 
-    internal static class Util
-    {
-        internal static AreaManager AreaManager = null;
-        internal static Dictionary<IntVec3, bool> BlockedTiles = new Dictionary<IntVec3, bool>();
-
-        public static void AddBlocked(IntVec3 pos)
-        {
-            BlockedTiles[pos] = true;
-        }
-
-        public static void RemoveBlocked(IntVec3 pos)
-        {
-            BlockedTiles.Remove(pos);
-        }
-
-        public static void Init(Map map)
-        {
-            if (AreaManager == null)
-            {
-                AreaManager = new AreaManager(map);
-                BlockedTiles.Clear();
-            }
-        }
-    }
-
     [HarmonyPatch(typeof(PathFinder), "GetAllowedArea")]
     static class Patch_PathFinder_GetAllowedArea
     {
         static void PostFix(Pawn pawn, Area __result)
         {
             Log.Warning("Patch_PathFinder_GetAllowedArea");
-            Util.Init(pawn.Map);
+            AvoidAreaUtil.Init(pawn.Map);
 
-            Area_Allowed rv = new Area_Allowed(Util.AreaManager, AllowedAreaMode.Any, "temp");
+            Area_Allowed rv = new Area_Allowed(AvoidAreaUtil.AreaManager, AllowedAreaMode.Any, "temp");
 
             int count = 0;
             if (__result != null)
@@ -76,11 +51,11 @@ namespace PathAvoid
                 }
             }
             count = 0;
-            foreach (IntVec3 vec in Util.BlockedTiles.Keys)
+            foreach (IntVec3 vec in AvoidAreaUtil.BlockedTiles.Keys)
             {
                 if (count < 10)
                 {
-                    Log.Warning(count + " area: " + vec.x + ", " + vec.z + " = " + Util.BlockedTiles[vec]);
+                    Log.Warning(count + " area: " + vec.x + ", " + vec.z + " = " + AvoidAreaUtil.BlockedTiles[vec]);
                 }
                 rv[vec] = true;
             }
