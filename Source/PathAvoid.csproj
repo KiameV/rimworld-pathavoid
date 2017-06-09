@@ -53,6 +53,7 @@
     <Compile Include="PathAvoidGrid.cs" />
     <Compile Include="PathDesignationCategoryDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
