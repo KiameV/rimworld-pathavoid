@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Verse;
 using UnityEngine;
 using RimWorld;
-using Verse.AI.Group;
 
 namespace PathAvoid
 {
