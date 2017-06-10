@@ -10,7 +10,7 @@
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidNormal</defName>
 		<name>Normal</name>
-		<level>18</level>
+		<level>10</level>
 		<color>(0,255,0)</color>
 		<display>false</display>
 	</PathAvoid.PathAvoidDef>

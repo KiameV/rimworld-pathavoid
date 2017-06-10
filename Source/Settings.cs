@@ -87,7 +87,7 @@ namespace PathAvoid
         public static void SetDefaults(Dictionary<string, string> d)
         {
             SetValue(d, "Prefer", "0");
-            SetValue(d, "Normal", "18");
+            SetValue(d, "Normal", "10");
             SetValue(d, "Dislike", "60");
             SetValue(d, "Hate", "123");
             SetValue(d, "Strong", "255");
