@@ -126,7 +126,6 @@ namespace PathAvoid
                     return;
                 }
             }
-            Messages.Message("Avoid Path settings applied", MessageSound.Benefit);
         }
     }
 
