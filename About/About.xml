@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Path Avoid - A17</name>
+	<name>Path Avoid</name>
 	<author>Kiame Vivacity</author>
-	<url>http://steamcommunity.com/sharedfiles/filedetails/?id=935210992</url>
-	<targetVersion>0.17.1557</targetVersion>
+	<url>https://ludeon.com/forums/index.php?topic=33027</url>
+	<targetVersion>0.18.1700</targetVersion>
 	<description>Path Avoid allows you to "nudge" the pathfinding system for your pawns, to make them prefer and avoid different areas. Use it to make your pawns follow pathways in your base, or avoid passing through a freezer to get to the other side! Avoidance won't prevent pawns from pathing, it'll just make them take an alternate path...
 
 Can be added to an existing save.

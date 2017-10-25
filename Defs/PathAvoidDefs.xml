@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<PathAvoid>
+<Defs>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidPrefer</defName>
 		<name>Prefer</name>
@@ -17,22 +17,22 @@
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidDislike</defName>
 		<name>Dislike</name>
-		<level>60</level>
+		<level>50</level>
 		<color>(255, 238, 86)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidHate</defName>
 		<name>Hate</name>
-		<level>123</level>
+		<level>120</level>
 		<color>(226, 136, 34)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidStrong</defName>
 		<name>Strong</name>
-		<level>255</level>
+		<level>250</level>
 		<color>(255,0,0)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>
-</PathAvoid>
+</Defs>

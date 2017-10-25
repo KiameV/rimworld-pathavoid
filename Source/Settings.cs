@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -29,13 +30,13 @@ namespace PathAvoid
             {
                 Settings.ButtonLocationString = "1000";
                 Settings.ApplyLocation();
-                Messages.Message("\"Pathing\" Button will be at the top (requires a re-load of a save).", MessageSound.Benefit);
+                Messages.Message("\"Pathing\" Button will be at the top (requires a re-load of a save).", MessageTypeDefOf.PositiveEvent);
             }
             if (Widgets.ButtonText(new Rect(175, 60, 150, 22), "Bottom"))
             {
                 Settings.ButtonLocationString = "0";
                 Settings.ApplyLocation();
-                Messages.Message("\"Pathing\" Button will be at the bottom (requires a re-load of a save).", MessageSound.Benefit);
+                Messages.Message("\"Pathing\" Button will be at the bottom (requires a re-load of a save).", MessageTypeDefOf.PositiveEvent);
             }
 
             Widgets.Label(new Rect(0, 95, 150, 22), "Custom Position:");
@@ -47,10 +48,10 @@ namespace PathAvoid
                 {
                     Settings.ButtonLocationString = result.ToString();
                     Settings.ApplyLocation();
-                    Messages.Message("Custom position applied (requires a re-load of a save).", MessageSound.Benefit);
+                    Messages.Message("Custom position applied (requires a re-load of a save).", MessageTypeDefOf.RejectInput);
                 }
                 else
-                    Messages.Message("Position is not a whole number", MessageSound.Negative);
+                    Messages.Message("Position is not a whole number", MessageTypeDefOf.NegativeEvent);
             }
 
             Widgets.Label(new Rect(0, 160, 150, 22), "Advanced Settings: ");
@@ -82,15 +83,16 @@ namespace PathAvoid
                     ApplyLevelSettings(avoidPathDefs);
                 }
             }
+            GUI.EndGroup();
         }
 
         public static void SetDefaults(Dictionary<string, string> d)
         {
             SetValue(d, "Prefer", "0");
             SetValue(d, "Normal", "10");
-            SetValue(d, "Dislike", "60");
-            SetValue(d, "Hate", "123");
-            SetValue(d, "Strong", "255");
+            SetValue(d, "Dislike", "50");
+            SetValue(d, "Hate", "120");
+            SetValue(d, "Strong", "250");
         }
 
         public static void SetValue(Dictionary<string, string> d, string name, string value)
@@ -110,19 +112,19 @@ namespace PathAvoid
                 {
                     if (value < 0)
                     {
-                        Messages.Message(current.name + " value cannot be less than 0. Setting to 0.", MessageSound.Negative);
+                        Messages.Message(current.name + " value cannot be less than 0. Setting to 0.", MessageTypeDefOf.RejectInput);
                         PathAvoidDefNameValue[current.name] = "0";
                     }
                     else if (value > 255)
                     {
-                        Messages.Message(current.name + " value cannot be greather than 255. Setting to 255.", MessageSound.Negative);
+                        Messages.Message(current.name + " value cannot be greather than 255. Setting to 255.", MessageTypeDefOf.RejectInput);
                         PathAvoidDefNameValue[current.name] = "255";
                     }
                     current.level = value;
                 }
                 else
                 {
-                    Messages.Message(current.name + " value is not a number.", MessageSound.Negative);
+                    Messages.Message(current.name + " value is not a number.", MessageTypeDefOf.RejectInput);
                     return;
                 }
             }
@@ -131,19 +133,31 @@ namespace PathAvoid
 
     class Settings : ModSettings
     {
+        private const string VERSION = "A18";
         public static string ButtonLocationString = "0";
 
         public override void ExposeData()
         {
             base.ExposeData();
 
+            string version = VERSION;
+            Scribe_Values.Look<string>(ref version, "PathAvoid.Version", null, true);
             Scribe_Values.Look<string>(ref ButtonLocationString, "PathAvoid.ButtonOrder", "0", false);
             Scribe_Values.Look<bool>(ref SettingsController.AdvancedModeEnabled, "PathAvoice.AdvancedModeEnabled", false, false);
+            
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                if (version == null || !version.Equals(VERSION))
+                {
+                    SettingsController.AdvancedModeEnabled = false;
+                }
+            }
 
             if (SettingsController.AdvancedModeEnabled)
             {
                 Dictionary<string, string> d = new Dictionary<string, string>();
                 SettingsController.SetDefaults(d);
+
                 foreach (KeyValuePair<string, string> kv in d)
                 {
                     int value = int.Parse(kv.Value);
