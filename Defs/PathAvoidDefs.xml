@@ -17,21 +17,21 @@
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidDislike</defName>
 		<name>Dislike</name>
-		<level>50</level>
+		<level>25</level>
 		<color>(255, 238, 86)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidHate</defName>
 		<name>Hate</name>
-		<level>120</level>
+		<level>50</level>
 		<color>(226, 136, 34)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidStrong</defName>
 		<name>Strong</name>
-		<level>250</level>
+		<level>200</level>
 		<color>(255,0,0)</color>
 		<display>true</display>	
 	</PathAvoid.PathAvoidDef>

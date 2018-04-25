@@ -90,9 +90,9 @@ namespace PathAvoid
         {
             SetValue(d, "Prefer", "0");
             SetValue(d, "Normal", "10");
-            SetValue(d, "Dislike", "50");
-            SetValue(d, "Hate", "120");
-            SetValue(d, "Strong", "250");
+            SetValue(d, "Dislike", "25");
+            SetValue(d, "Hate", "50");
+            SetValue(d, "Strong", "200");
         }
 
         public static void SetValue(Dictionary<string, string> d, string name, string value)
