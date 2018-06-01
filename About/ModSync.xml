@@ -1,7 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ModSyncNinjaData>
-	<ID>2bc7d595-b521-4534-9cd7-20cf31008517</ID>
-	<ModName>Path Avoid</ModName>
-	<Version>0.18.1.0</Version>
-	<SaveBreaking>false</SaveBreaking>
+  <ID>2BC7D595-B521-4534-9CD7-20CF31008517</ID>
+  <ModName>Path Avoid</ModName>
+  <Version>0.18.1.0</Version>
+  <SaveBreaking>False</SaveBreaking>
+  <Host name="Github">
+    <Owner>KiameV</Owner>
+    <Project>rimworld-pathavoid</Project>
+    <DownloadFrom>ModSyncReleases</DownloadFrom>
+    <Branch>master</Branch>
+  </Host>
 </ModSyncNinjaData>
