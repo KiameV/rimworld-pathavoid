@@ -10,6 +10,8 @@ namespace PathAvoid
     {
         private class PathAvoidLevel : Verse.ICellBoolGiver
         {
+            public static byte baseGridValue = 0;
+
             private PathAvoidGrid grid;
 
             private Color color;
@@ -53,7 +55,7 @@ namespace PathAvoid
             this.grid = new ByteGrid(map);
             for (int i = 0; i < map.cellIndices.NumGridCells; i++)
             {
-                this.grid[i] = 10;
+                this.grid[i] = PathAvoidLevel.baseGridValue;
             }
         }
 
@@ -138,9 +140,10 @@ namespace PathAvoid
         
         public static void ApplyAvoidGrid(Pawn p, ref ByteGrid result)
         {
-            if (result == null &&
-                p.Faction != null && p.Faction.def.canUseAvoidGrid &&
-                (p.Faction == Faction.OfPlayer || !p.Faction.RelationWith(Faction.OfPlayer, false).hostile))
+            if (result == null && 
+                p.Faction != null && 
+                p.Faction.def.canUseAvoidGrid &&
+                IsFactionFriendly(p.Faction))
             {
                 PathAvoidGrid pathAvoidGrid = p.Map.GetComponent<PathAvoidGrid>();
                 if (pathAvoidGrid == null)
@@ -150,6 +153,15 @@ namespace PathAvoid
                 }
                 result = pathAvoidGrid.grid;
             }
+        }
+
+        private static bool IsFactionFriendly(Faction f)
+        {
+            if (f == Faction.OfPlayer)
+                return true;
+
+            FactionRelationKind kind = f.RelationWith(Faction.OfPlayer, false).kind;
+            return kind != FactionRelationKind.Hostile;
         }
     }
 }

@@ -5,15 +5,15 @@
 		<name>Prefer</name>
 		<level>0</level>
 		<color>(130,213,255)</color>
-		<display>true</display>	
+		<display>false</display>	
 	</PathAvoid.PathAvoidDef>
-	<PathAvoid.PathAvoidDef>
+	<!--<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidNormal</defName>
 		<name>Normal</name>
 		<level>10</level>
 		<color>(0,255,0)</color>
 		<display>false</display>
-	</PathAvoid.PathAvoidDef>
+	</PathAvoid.PathAvoidDef>-->
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidDislike</defName>
 		<name>Dislike</name>

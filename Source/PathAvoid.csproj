@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Designator_PathAvoid.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="HarmonyPatches.cs" />
     <Compile Include="PathAvoidDef.cs" />
     <Compile Include="PathAvoidGrid.cs" />
     <Compile Include="PathDesignationCategoryDef.cs" />
@@ -58,6 +58,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)..\About\About.xml" "$(OutDir)..\About\" /Y /I
+xcopy "$(ProjectDir)..\About\ModSync.xml" "$(OutDir)..\About\" /Y /I
 xcopy "$(ProjectDir)..\About\Preview.png" "$(OutDir)..\About\" /Y /I
 xcopy "$(ProjectDir)..\About\PublishedFileId.txt" "$(OutDir)..\About\" /Y /I
 xcopy "$(ProjectDir)..\Languages\*.*" "$(OutDir)..\Languages" /Y /I /E

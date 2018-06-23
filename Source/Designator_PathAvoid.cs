@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using RimWorld;
+using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace PathAvoid
@@ -7,19 +9,19 @@ namespace PathAvoid
     {
         private PathAvoidDef def;
 
-        public override bool DragDrawMeasurements
-        {
-            get
-            {
-                return true;
-            }
-        }
-
         public override int DraggableDimensions
         {
             get
             {
                 return 2;
+            }
+        }
+
+        public override bool DragDrawMeasurements
+        {
+            get
+            {
+                return true;
             }
         }
 
@@ -47,8 +49,12 @@ namespace PathAvoid
             }
         }
 
-        public override AcceptanceReport CanDesignateCell(IntVec3 loc)
+        public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
+            if (!c.InBounds(base.Map))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -56,13 +62,15 @@ namespace PathAvoid
         {
             this.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
             this.def = def;
+            this.useMouseIcon = true;
+            this.soundDragSustain = SoundDefOf.Designate_DragStandard;
+            this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
         }
 
         public override void DesignateSingleCell(IntVec3 c)
         {
             PathAvoidGrid pathAvoidGrid = base.Map.GetComponent<PathAvoidGrid>();
-            bool flag = pathAvoidGrid == null;
-            if (flag)
+            if (pathAvoidGrid == null)
             {
                 pathAvoidGrid = new PathAvoidGrid(base.Map);
                 base.Map.components.Add(pathAvoidGrid);
@@ -81,6 +89,11 @@ namespace PathAvoid
                 base.Map.components.Add(pathAvoidGrid);
             }
             pathAvoidGrid.MarkForDraw();
+        }
+
+        public override void RenderHighlight(List<IntVec3> dragCells)
+        {
+            DesignatorUtility.RenderHighlightOverSelectableCells(this, dragCells);
         }
     }
 }

@@ -89,7 +89,6 @@ namespace PathAvoid
         public static void SetDefaults(Dictionary<string, string> d)
         {
             SetValue(d, "Prefer", "0");
-            SetValue(d, "Normal", "10");
             SetValue(d, "Dislike", "25");
             SetValue(d, "Hate", "50");
             SetValue(d, "Strong", "200");
@@ -133,7 +132,7 @@ namespace PathAvoid
 
     class Settings : ModSettings
     {
-        private const string VERSION = "A18";
+        private const string VERSION = "1.0";
         public static string ButtonLocationString = "0";
 
         public override void ExposeData()
