@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModSyncNinjaData>
-  <ID>2BC7D595-B521-4534-9CD7-20CF31008517</ID>
   <ModName>Path Avoid</ModName>
-  <Version>1.0.0.1</Version>
+  <Version>0.19.0.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>KiameV</Owner>
