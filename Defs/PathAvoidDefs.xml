@@ -2,7 +2,7 @@
 <Defs>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidPrefer</defName>
-		<name>Prefer</name>
+		<name>Normal</name>
 		<level>0</level>
 		<color>(130,213,255)</color>
 		<display>false</display>	
