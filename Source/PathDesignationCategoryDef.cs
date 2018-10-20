@@ -14,7 +14,6 @@ namespace PathAvoid
                 {
                     if (!Settings.IsPreferredEnabled && current.name.Equals("Prefer"))
                     {
-                        Log.Error("Not including prefer");
                         continue;
                     }
                     list.Add(new Designator_PathAvoid(current));
