@@ -12,6 +12,11 @@ namespace PathAvoid
                 List<Designator> list = base.AllResolvedDesignators;
                 foreach (PathAvoidDef current in DefDatabase<PathAvoidDef>.AllDefs)
                 {
+                    if (!Settings.IsPreferredEnabled && current.name.Equals("Prefer"))
+                    {
+                        Log.Error("Not including prefer");
+                        continue;
+                    }
                     list.Add(new Designator_PathAvoid(current));
                 }
             });

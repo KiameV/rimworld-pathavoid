@@ -10,8 +10,6 @@ namespace PathAvoid
     {
         private class PathAvoidLevel : Verse.ICellBoolGiver
         {
-            public static byte baseGridValue = 0;
-
             private PathAvoidGrid grid;
 
             private Color color;
@@ -55,7 +53,7 @@ namespace PathAvoid
             this.grid = new ByteGrid(map);
             for (int i = 0; i < map.cellIndices.NumGridCells; i++)
             {
-                this.grid[i] = PathAvoidLevel.baseGridValue;
+                this.grid[i] = SettingsController.GetBaseGridValue();
             }
         }
 

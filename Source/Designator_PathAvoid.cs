@@ -65,6 +65,24 @@ namespace PathAvoid
             this.useMouseIcon = true;
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
             this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            switch (def.name)
+            {
+                case "Prefer":
+                    this.order = 1;
+                    break;
+                case "Normal":
+                    this.order = 2;
+                    break;
+                case "Dislike":
+                    this.order = 3;
+                    break;
+                case "Hate":
+                    this.order = 4;
+                    break;
+                case "Strong":
+                    this.order = 5;
+                    break;
+            }
         }
 
         public override void DesignateSingleCell(IntVec3 c)
