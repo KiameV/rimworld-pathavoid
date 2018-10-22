@@ -5,7 +5,8 @@
 		<name>Prefer</name>
 		<level>0</level>
 		<color>(130,213,255)</color>
-		<display>false</display>	
+		<display>true</display>
+		<isPrefer>true</isPrefer>
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidNormal</defName>
@@ -13,6 +14,7 @@
 		<level>0</level>
 		<color>(0,255,0)</color>
 		<display>false</display>
+		<isPrefer>false</isPrefer>
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidDislike</defName>
@@ -20,6 +22,7 @@
 		<level>25</level>
 		<color>(255, 238, 86)</color>
 		<display>true</display>	
+		<isPrefer>false</isPrefer>
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidHate</defName>
@@ -27,6 +30,7 @@
 		<level>50</level>
 		<color>(226, 136, 34)</color>
 		<display>true</display>	
+		<isPrefer>false</isPrefer>
 	</PathAvoid.PathAvoidDef>
 	<PathAvoid.PathAvoidDef>
 		<defName>PathAvoidStrong</defName>
@@ -34,5 +38,6 @@
 		<level>200</level>
 		<color>(255,0,0)</color>
 		<display>true</display>	
+		<isPrefer>false</isPrefer>
 	</PathAvoid.PathAvoidDef>
 </Defs>

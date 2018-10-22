@@ -25,13 +25,17 @@ namespace PathAvoid
             foreach (PathAvoidDef d in DefDatabase<PathAvoidDef>.AllDefs)
             {
                 if (d.defName.Equals("PathAvoidNormal"))
+                {
                     return (byte)d.level;
+                }
             }
 
             if (PathAvoidDefNameValue.TryGetValue("Normal", out string s))
             {
                 if (byte.TryParse(s, out byte v))
+                {
                     return v;
+                }
             }
 
             return 0;
@@ -115,7 +119,7 @@ namespace PathAvoid
 
                 foreach (PathAvoidDef current in avoidPathDefs)
                 {
-                    if (!Settings.IsPreferredEnabled && current.defName.Equals("PathAvoidPrefer"))
+                    if (!Settings.IsPreferredEnabled && current.isPrefer)
                         continue;
 
                     Widgets.Label(new Rect(20, y, 50, 22), current.name);
@@ -167,8 +171,13 @@ namespace PathAvoid
 
         public static void ApplyLevelSettings(IEnumerable<PathAvoidDef> avoidPathDefs)
         {
+            if (PathAvoidDefNameValue == null || PathAvoidDefNameValue.Count == 0)
+                return;
+
             foreach (PathAvoidDef current in avoidPathDefs)
             {
+                if (!PathAvoidDefNameValue.ContainsKey(current.name))
+                    continue;
                 if (int.TryParse(PathAvoidDefNameValue[current.name], out int value))
                 {
                     if (value < 0)
@@ -201,6 +210,12 @@ namespace PathAvoid
         public override void ExposeData()
         {
             base.ExposeData();
+
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                if (!SettingsController.AdvancedModeEnabled)
+                    IsPreferredEnabled = false;
+            }
 
             string version = VERSION;
             Scribe_Values.Look<string>(ref version, "PathAvoid.Version", null, true);
@@ -236,6 +251,10 @@ namespace PathAvoid
                         SettingsController.SetValue(SettingsController.PathAvoidDefNameValue, kv.Key, value.ToString());
                     }
                 }
+            }
+            else // Not advanced mode
+            {
+                IsPreferredEnabled = false;
             }
 
             if (SettingsController.PathAvoidDefNameValue == null)

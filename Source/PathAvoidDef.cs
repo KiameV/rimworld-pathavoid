@@ -14,5 +14,7 @@ namespace PathAvoid
         public bool display;
 
         public Color color;
+
+        public bool isPrefer;
     }
 }

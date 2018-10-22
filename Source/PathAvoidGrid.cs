@@ -114,8 +114,10 @@ namespace PathAvoid
             this.LevelDrawers = new List<CellBoolDrawer>();
             foreach (PathAvoidDef current in DefDatabase<PathAvoidDef>.AllDefs)
             {
-                bool display = current.display;
-                if (display)
+                if (current.isPrefer && !Settings.IsPreferredEnabled)
+                    continue;
+
+                if (current.display)
                 {
                     CellBoolDrawer item = new CellBoolDrawer(new PathAvoidGrid.PathAvoidLevel(this, (byte)current.level, current.color), this.map.Size.x, this.map.Size.z);
                     this.LevelDrawers.Add(item);
