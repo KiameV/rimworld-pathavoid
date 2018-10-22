@@ -136,11 +136,13 @@ namespace PathAvoid
                 if (Widgets.ButtonText(new Rect(40, y, 60, 22), "Apply"))
                 {
                     ApplyLevelSettings(avoidPathDefs);
+                    Messages.Message("Settings Applied", MessageTypeDefOf.PositiveEvent);
                 }
                 if (Widgets.ButtonText(new Rect(140, y, 60, 22), "Default"))
                 {
                     SetDefaults(PathAvoidDefNameValue);
                     ApplyLevelSettings(avoidPathDefs);
+                    Messages.Message("Default Settings Applied", MessageTypeDefOf.PositiveEvent);
                 }
             }
             GUI.EndGroup();
@@ -149,6 +151,7 @@ namespace PathAvoid
         public static void SetDefaults(Dictionary<string, string> d)
         {
             SetValue(d, "Prefer", "0");
+            SetValue(d, "Normal", "0");
             SetValue(d, "Dislike", "25");
             SetValue(d, "Hate", "50");
             SetValue(d, "Strong", "200");
