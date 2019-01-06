@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PathAvoidPrefer.name>更喜歡</PathAvoidPrefer.name>
+  <PathAvoidNormal.name>正常</PathAvoidNormal.name>
+  <PathAvoidDislike.name>繞過</PathAvoidDislike.name>
+  <PathAvoidHate.name>避免</PathAvoidHate.name>
+  <PathAvoidStrong.name>禁止</PathAvoidStrong.name>
+
+</LanguageData>
