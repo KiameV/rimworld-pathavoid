@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using RimWorld;
 using System.Reflection;
 using Verse;
@@ -10,7 +10,7 @@ namespace PathAvoid
     {
         static HarmonyPatches()
         {
-            var harmony = HarmonyInstance.Create("com.pathavoid.rimworld.mod");
+            var harmony = new Harmony("com.pathavoid.rimworld.mod");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             Log.Message("Path Avoid: Adding Harmony Postfix to PawnUtility.GetAvoidGrid()");
