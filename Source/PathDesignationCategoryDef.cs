@@ -16,7 +16,9 @@ namespace PathAvoid
                     {
                         continue;
                     }
-                    list.Add(new Designator_PathAvoid(current));
+                    var d = new Designator_PathAvoid();
+                    d.Initialize(current);
+                    list.Add(d);
                 }
             });
         }

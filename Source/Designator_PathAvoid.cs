@@ -57,8 +57,9 @@ namespace PathAvoid
             }
             return true;
         }
+        public Designator_PathAvoid() { }
 
-        public Designator_PathAvoid(PathAvoidDef def)
+        public void Initialize(PathAvoidDef def)
         {
             this.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
             this.def = def;
