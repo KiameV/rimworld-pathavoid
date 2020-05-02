@@ -5,7 +5,7 @@ using Verse;
 
 namespace PathAvoid
 {
-    public class Designator_PathAvoid : Designator
+    public abstract class Designator_PathAvoid : Designator
     {
         private PathAvoidDef def;
 
@@ -59,31 +59,13 @@ namespace PathAvoid
         }
         public Designator_PathAvoid() { }
 
-        public void Initialize(PathAvoidDef def)
+        protected void Initialize(PathAvoidDef def)
         {
             this.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
             this.def = def;
             this.useMouseIcon = true;
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
             this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
-            switch (def.name)
-            {
-                case "Prefer":
-                    this.order = 1;
-                    break;
-                case "Normal":
-                    this.order = 2;
-                    break;
-                case "Dislike":
-                    this.order = 3;
-                    break;
-                case "Hate":
-                    this.order = 4;
-                    break;
-                case "Strong":
-                    this.order = 5;
-                    break;
-            }
         }
 
         public override void DesignateSingleCell(IntVec3 c)
@@ -113,6 +95,46 @@ namespace PathAvoid
         public override void RenderHighlight(List<IntVec3> dragCells)
         {
             DesignatorUtility.RenderHighlightOverSelectableCells(this, dragCells);
+        }
+    }
+
+    public class Designator_PathAvoid_Prefer : Designator_PathAvoid
+    {
+        public Designator_PathAvoid_Prefer()
+        {
+            Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidPrefer"));
+        }
+    }
+
+    public class Designator_PathAvoid_Normal : Designator_PathAvoid
+    {
+        public Designator_PathAvoid_Normal()
+        {
+            Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidNormal"));
+        }
+    }
+
+    public class Designator_PathAvoid_Dislike : Designator_PathAvoid
+    {
+        public Designator_PathAvoid_Dislike()
+        {
+            Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidDislike"));
+        }
+    }
+
+    public class Designator_PathAvoid_Hate : Designator_PathAvoid
+    {
+        public Designator_PathAvoid_Hate()
+        {
+            Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidHate"));
+        }
+    }
+
+    public class Designator_PathAvoid_Strong : Designator_PathAvoid
+    {
+        public Designator_PathAvoid_Strong()
+        {
+            Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidStrong"));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -274,16 +275,31 @@ namespace PathAvoid
                     SettingsController.ApplyLevelSettings(DefDatabase<PathAvoidDef>.AllDefs);
                 }
             }
+            SetIsPreferEnabled();
         }
 
         public static void ApplyLocation()
         {
             if (int.TryParse(ButtonLocationString, out int loc))
             {
-                foreach (PathDesignationCategoryDef def in DefDatabase<PathDesignationCategoryDef>.AllDefs)
+                foreach (DesignationCategoryDef def in DefDatabase<DesignationCategoryDef>.AllDefsListForReading)
                 {
-                    def.order = loc;
+                    if (def.defName == "Pathing")
+                    {
+                        def.order = loc;
+                        break;
+                    }
                 }
+            }
+        }
+
+        public static void SetIsPreferEnabled()
+        {
+            var game = Current.Game;
+            if (game != null)
+            {
+                var rules = game.GetType().GetField("rules", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(game) as GameRules;
+                rules.SetAllowDesignator(typeof(Designator_PathAvoid_Prefer), IsPreferredEnabled);
             }
         }
     }

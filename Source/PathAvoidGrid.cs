@@ -23,8 +23,9 @@ namespace PathAvoid
                     return this.color;
                 }
             }
+            public PathAvoidLevel() { }
 
-            public PathAvoidLevel(PathAvoidGrid grid, byte level, Color color)
+            public void Initialize(PathAvoidGrid grid, byte level, Color color)
             {
                 this.grid = grid;
                 this.level = level;
@@ -119,7 +120,9 @@ namespace PathAvoid
 
                 if (current.display)
                 {
-                    CellBoolDrawer item = new CellBoolDrawer(new PathAvoidGrid.PathAvoidLevel(this, (byte)current.level, current.color), this.map.Size.x, this.map.Size.z);
+                    var p = new PathAvoidGrid.PathAvoidLevel();
+                    p.Initialize(this, (byte)current.level, current.color);
+                    CellBoolDrawer item = new CellBoolDrawer(p, this.map.Size.x, this.map.Size.z);
                     this.LevelDrawers.Add(item);
                 }
             }

@@ -20,6 +20,26 @@ namespace PathAvoid
         }
     }
 
+    [HarmonyPatch(typeof(Page_SelectScenario), "BeginScenarioConfiguration")]
+    static class Patch_Page_SelectScenario_BeginScenarioConfiguration
+    {
+        [HarmonyPriority(Priority.First)]
+        static void Postfix()
+        {
+            Settings.SetIsPreferEnabled();
+        }
+    }
+
+    [HarmonyPatch(typeof(SavedGameLoaderNow), "LoadGameFromSaveFileNow")]
+    static class Patch_SavedGameLoaderNow_LoadGameFromSaveFileNow
+    {
+        [HarmonyPriority(Priority.First)]
+        static void Postfix()
+        {
+            Settings.SetIsPreferEnabled();
+        }
+    }
+
     [HarmonyPatch(typeof(PawnUtility), "GetAvoidGrid")]
     static class Patch_PawnUtility_GetAvoidGrid
     {
