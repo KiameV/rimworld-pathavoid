@@ -299,7 +299,7 @@ namespace PathAvoid
             if (game != null)
             {
                 var rules = game.GetType().GetField("rules", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(game) as GameRules;
-                rules.SetAllowDesignator(typeof(Designator_PathAvoid_Prefer), IsPreferredEnabled);
+                rules?.SetAllowDesignator(typeof(Designator_PathAvoid_Prefer), IsPreferredEnabled);
             }
         }
     }

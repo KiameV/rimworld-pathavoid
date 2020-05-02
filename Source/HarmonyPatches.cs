@@ -20,8 +20,8 @@ namespace PathAvoid
         }
     }
 
-    [HarmonyPatch(typeof(Page_SelectScenario), "BeginScenarioConfiguration")]
-    static class Patch_Page_SelectScenario_BeginScenarioConfiguration
+    [HarmonyPatch(typeof(Game), "InitNewGame")]
+    static class Patch_Game_InitNewGame
     {
         [HarmonyPriority(Priority.First)]
         static void Postfix()
