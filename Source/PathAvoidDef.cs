@@ -16,5 +16,13 @@ namespace PathAvoid
         public Color color;
 
         public bool isPrefer;
+
+        public KeyBindingDef hotKey;
+    }
+
+    public class MapSettingsDef : Def
+    {
+        public string name;
+        public KeyBindingDef hotKey;
     }
 }

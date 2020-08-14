@@ -113,7 +113,7 @@ namespace PathAvoid
         public void BuildLevelDrawers()
         {
             this.LevelDrawers = new List<CellBoolDrawer>();
-            foreach (PathAvoidDef current in DefDatabase<PathAvoidDef>.AllDefs)
+            foreach (PathAvoidDef current in DefDatabase<PathAvoidDef>.AllDefsListForReading)
             {
                 if (current.isPrefer && !Settings.IsPreferredEnabled)
                     continue;
@@ -140,7 +140,20 @@ namespace PathAvoid
                 }
             }
         }
-        
+
+        public void SetValue(int pos, byte val)
+        {
+            this.grid[pos] = val;
+            bool flag = this.LevelDrawers != null;
+            if (flag)
+            {
+                foreach (CellBoolDrawer current in this.LevelDrawers)
+                {
+                    current.SetDirty();
+                }
+            }
+        }
+
         public static void ApplyAvoidGrid(Pawn p, ref ByteGrid result)
         {
             if (result == null && 

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Designator_PathAvoid.cs" />
+    <Compile Include="MapSettingsDialog.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="PathAvoidDef.cs" />
     <Compile Include="PathAvoidGrid.cs" />

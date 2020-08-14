@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<PathAvoid.PathAvoidGlobalSettings>Path Avoid Global Settings</PathAvoid.PathAvoidGlobalSettings>
+	<PathAvoid.ApplyToTerrainType>Apply To Terrain Type</PathAvoid.ApplyToTerrainType>
+	<PathAvoid.TerrainType>Terrain Type</PathAvoid.TerrainType>
+	<PathAvoid.PathAvoidType>Path Avoid Type</PathAvoid.PathAvoidType>
+	<PathAvoid.></PathAvoid.>
+	<PathAvoid.></PathAvoid.>
+	<PathAvoid.ApplyToAllTiles>Apply To All Tiles</PathAvoid.ApplyToAllTiles>
+</LanguageData>

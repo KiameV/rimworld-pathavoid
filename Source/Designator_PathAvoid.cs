@@ -5,10 +5,8 @@ using Verse;
 
 namespace PathAvoid
 {
-    public abstract class Designator_PathAvoid : Designator
+    public abstract class ADesignator_PathAvoid : Designator
     {
-        private PathAvoidDef def;
-
         public override int DraggableDimensions
         {
             get
@@ -25,30 +23,6 @@ namespace PathAvoid
             }
         }
 
-        public override Color IconDrawColor
-        {
-            get
-            {
-                return this.def.color;
-            }
-        }
-
-        public override string Desc
-        {
-            get
-            {
-                return this.def.desc;
-            }
-        }
-
-        public override string Label
-        {
-            get
-            {
-                return this.def.name;
-            }
-        }
-
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
             if (!c.InBounds(base.Map))
@@ -57,16 +31,33 @@ namespace PathAvoid
             }
             return true;
         }
-        public Designator_PathAvoid() { }
+        public ADesignator_PathAvoid() { }
 
-        protected void Initialize(PathAvoidDef def)
+        protected virtual void Initialize(PathAvoidDef def)
         {
-            this.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
-            this.def = def;
-            this.useMouseIcon = true;
-            this.soundDragSustain = SoundDefOf.Designate_DragStandard;
-            this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            base.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
+            base.hotKey = def.hotKey;
+            base.useMouseIcon = true;
+            base.soundDragSustain = SoundDefOf.Designate_DragStandard;
+            base.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
         }
+    }
+
+    public abstract class Designator_PathAvoid : ADesignator_PathAvoid
+    {
+        protected PathAvoidDef def;
+
+        protected override void Initialize(PathAvoidDef def)
+        {
+            base.Initialize(def);
+            this.def = def;
+        }
+
+        public override Color IconDrawColor => this.def.color;
+
+        public override string Desc => this.def.desc;
+
+        public override string Label => this.def.name;
 
         public override void DesignateSingleCell(IntVec3 c)
         {
@@ -135,6 +126,31 @@ namespace PathAvoid
         public Designator_PathAvoid_Strong()
         {
             Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidStrong"));
+        }
+    }
+
+    public class Designator_MapSettings : ADesignator_PathAvoid
+    {
+        private MapSettingsDef def;
+
+        public override Color IconDrawColor => Color.white;
+
+        public override string Label => this.def.name;
+
+        public Designator_MapSettings()
+        {
+            this.def = DefDatabase<MapSettingsDef>.GetNamed("PathAvoidMapSettings");
+            base.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
+            base.hotKey = def.hotKey;
+            base.useMouseIcon = true;
+            base.soundDragSustain = SoundDefOf.Designate_DragStandard;
+            base.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+        }
+
+        public override void Selected()
+        {
+            base.Selected();
+            Find.WindowStack.Add(new MapSettingsDialog());
         }
     }
 }

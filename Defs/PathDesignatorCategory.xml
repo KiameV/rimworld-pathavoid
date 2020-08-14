@@ -12,6 +12,7 @@
 		  <li>PathAvoid.Designator_PathAvoid_Dislike</li>
 		  <li>PathAvoid.Designator_PathAvoid_Hate</li>
 		  <li>PathAvoid.Designator_PathAvoid_Strong</li>
+		  <li>PathAvoid.Designator_MapSettings</li>
 		</specialDesignatorClasses>
 	</DesignationCategoryDef>
 </Defs>
