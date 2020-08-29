@@ -22,12 +22,14 @@ namespace PathAvoid
             base.forcePause = true;
             base.absorbInputAroundWindow = true;
 
-            foreach (var tpm in Current.Game.CurrentMap.Biome.terrainPatchMakers)
+            foreach (var t in Current.Game.CurrentMap.Biome.terrainsByFertility)
             {
-                foreach (var t in tpm.thresholds)
-                {
-                    terrain[t.terrain.defName] = t.terrain; 
-                }
+                terrain[t.terrain.defName] = t.terrain; 
+            }
+
+            if (terrain.Count == 0)
+            {
+                Log.Warning("No terrain found for biome " + Current.Game.CurrentMap.Biome.defName);
             }
 
             foreach (var pad in DefDatabase<PathAvoidDef>.AllDefsListForReading)
@@ -47,29 +49,36 @@ namespace PathAvoid
             y += 40;
 
             x += 10;
-            if (Widgets.ButtonText(new Rect(x, y, 200, 32), (selectedTerrainDef == null) ? (string)"PathAvoid.TerrainType".Translate() : selectedTerrainDef.defName))
+            if (terrain.Values.Count == 0)
             {
-                List<FloatMenuOption> list = new List<FloatMenuOption>();
-                foreach (var v in terrain.Values)
-                {
-                    list.Add(new FloatMenuOption(v.defName, delegate
-                    {
-                        selectedTerrainDef = v;
-                    }));
-                }
-                Find.WindowStack.Add(new FloatMenu(list));
+                Widgets.Label(new Rect(x, y, 200, 32), "No patch types found for current biome");
             }
-            if (Widgets.ButtonText(new Rect(x + 220, y, 200, 32), (selectedPathAvoidDef == null) ? (string)"PathAvoid.PathAvoidType".Translate() : selectedPathAvoidDef.name))
+            else
             {
-                List<FloatMenuOption> list = new List<FloatMenuOption>();
-                foreach (var v in pathAvoidOptions.Values)
+                if (Widgets.ButtonText(new Rect(x, y, 200, 32), (selectedTerrainDef == null) ? (string)"PathAvoid.TerrainType".Translate() : selectedTerrainDef.defName))
                 {
-                    list.Add(new FloatMenuOption(v.name, delegate
+                    List<FloatMenuOption> list = new List<FloatMenuOption>();
+                    foreach (var v in terrain.Values)
                     {
-                        selectedPathAvoidDef = v;
-                    }));
+                        list.Add(new FloatMenuOption(v.defName, delegate
+                        {
+                            selectedTerrainDef = v;
+                        }));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(list));
                 }
-                Find.WindowStack.Add(new FloatMenu(list));
+                if (Widgets.ButtonText(new Rect(x + 220, y, 200, 32), (selectedPathAvoidDef == null) ? (string)"PathAvoid.PathAvoidType".Translate() : selectedPathAvoidDef.name))
+                {
+                    List<FloatMenuOption> list = new List<FloatMenuOption>();
+                    foreach (var v in pathAvoidOptions.Values)
+                    {
+                        list.Add(new FloatMenuOption(v.name, delegate
+                        {
+                            selectedPathAvoidDef = v;
+                        }));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(list));
+                }
             }
             y += 40;
 
