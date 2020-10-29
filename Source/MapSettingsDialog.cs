@@ -22,9 +22,10 @@ namespace PathAvoid
             base.forcePause = true;
             base.absorbInputAroundWindow = true;
 
-            foreach (var t in Current.Game.CurrentMap.Biome.terrainsByFertility)
+            var grid = Current.Game.CurrentMap.terrainGrid.topGrid;
+            for (int i = 0; i < grid.Length; ++i)
             {
-                terrain[t.terrain.defName] = t.terrain; 
+                terrain[grid[i].defName] = grid[i];
             }
 
             if (terrain.Count == 0)
