@@ -7,6 +7,7 @@
         <li>1.0</li>
         <li>1.1</li>
         <li>1.2</li>
+        <li>1.3</li>
     </supportedVersions>
 	<packageId>pathavoid.kv.rw</packageId>
 	<description>Path Avoid allows you to "nudge" the pathfinding system for your pawns, to make them prefer and avoid different areas. Use it to make your pawns follow pathways in your base, or avoid passing through a freezer to get to the other side! Avoidance won't prevent pawns from pathing, it'll just make them take an alternate path...
