@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PathAvoidPrefer.name>Preferido</PathAvoidPrefer.name>
+  <PathAvoidNormal.name>Normal</PathAvoidNormal.name>
+  <PathAvoidDislike.name>Indesejado</PathAvoidDislike.name>
+  <PathAvoidHate.name>Odiado</PathAvoidHate.name>
+  <PathAvoidStrong.name>Proibido</PathAvoidStrong.name>
+
+</LanguageData>

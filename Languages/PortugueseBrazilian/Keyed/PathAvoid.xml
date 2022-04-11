@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<PathAvoid.PathAvoidGlobalSettings>Config. Globais PathAvoid</PathAvoid.PathAvoidGlobalSettings>
+	<PathAvoid.ApplyToTerrainType>Aplicar a Tipo de Terreno</PathAvoid.ApplyToTerrainType>
+	<PathAvoid.TerrainType>Terreno</PathAvoid.TerrainType>
+	<PathAvoid.PathAvoidType>Tipo de PathAvoid</PathAvoid.PathAvoidType>
+	<PathAvoid.></PathAvoid.>
+	<PathAvoid.></PathAvoid.>
+	<PathAvoid.ApplyToAllTiles>Aplicar a Todos Espaços</PathAvoid.ApplyToAllTiles>
+</LanguageData>
