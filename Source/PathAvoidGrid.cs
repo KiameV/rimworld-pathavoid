@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Verse;
-using UnityEngine;
 using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace PathAvoid
 {
@@ -42,6 +42,8 @@ namespace PathAvoid
                 return Color.white;
             }
         }
+
+        private static IDictionary<int, PathAvoidGrid> gridsByMap = new Dictionary<int, PathAvoidGrid>();
 
         private ByteGrid grid;
 
@@ -161,12 +163,21 @@ namespace PathAvoid
                 p.Faction.def.canUseAvoidGrid &&
                 IsFactionFriendly(p.Faction))
             {
-                PathAvoidGrid pathAvoidGrid = p.Map.GetComponent<PathAvoidGrid>();
-                if (pathAvoidGrid == null)
+                Map map = p.Map;
+
+                // Optimization: Use a cache for obtaining the avoidance grid for the current map.
+                // GetComponent() is expensive unless optimized by mods such as Performance Optimizer.
+                if (!gridsByMap.TryGetValue(map.uniqueID, out PathAvoidGrid pathAvoidGrid))
                 {
-                    pathAvoidGrid = new PathAvoidGrid(p.Map);
-                    p.Map.components.Add(pathAvoidGrid);
+                    pathAvoidGrid = map.GetComponent<PathAvoidGrid>();
+                    if (pathAvoidGrid == null)
+                    {
+                        pathAvoidGrid = new PathAvoidGrid(map);
+                        map.components.Add(pathAvoidGrid);
+                    }
+                    gridsByMap.Add(map.uniqueID, pathAvoidGrid);
                 }
+
                 result = pathAvoidGrid.grid;
             }
         }
