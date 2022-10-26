@@ -43,7 +43,18 @@ namespace PathAvoid
             }
         }
 
-        private static IDictionary<int, PathAvoidGrid> gridsByMap = new Dictionary<int, PathAvoidGrid>();
+        struct GridTimeout
+        {
+            public PathAvoidGrid Grid;
+            public DateTime CreatedAt;
+            public GridTimeout(PathAvoidGrid grid)
+            {
+                this.Grid = grid;
+                this.CreatedAt = DateTime.Now;
+            }
+        }
+
+        private static IDictionary<int, GridTimeout> gridsByMap = new Dictionary<int, GridTimeout>();
 
         private ByteGrid grid;
 
@@ -167,18 +178,19 @@ namespace PathAvoid
 
                 // Optimization: Use a cache for obtaining the avoidance grid for the current map.
                 // GetComponent() is expensive unless optimized by mods such as Performance Optimizer.
-                if (!gridsByMap.TryGetValue(map.uniqueID, out PathAvoidGrid pathAvoidGrid))
+                if (!gridsByMap.TryGetValue(map.uniqueID, out GridTimeout gridTimeout) ||
+                    DateTime.Now.Subtract(gridTimeout.CreatedAt).Ticks > TimeSpan.TicksPerMinute)
                 {
-                    pathAvoidGrid = map.GetComponent<PathAvoidGrid>();
-                    if (pathAvoidGrid == null)
+                    gridTimeout = new GridTimeout(map.GetComponent<PathAvoidGrid>());
+                    if (gridTimeout.Grid == null)
                     {
-                        pathAvoidGrid = new PathAvoidGrid(map);
-                        map.components.Add(pathAvoidGrid);
+                        gridTimeout.Grid = new PathAvoidGrid(map);
+                        map.components.Add(gridTimeout.Grid);
                     }
-                    gridsByMap.Add(map.uniqueID, pathAvoidGrid);
+                    gridsByMap[map.uniqueID] = gridTimeout;
                 }
 
-                result = pathAvoidGrid.grid;
+                result = gridTimeout.Grid.grid;
             }
         }
 
